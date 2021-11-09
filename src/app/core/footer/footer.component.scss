@@ -1,0 +1,110 @@
+@import '../../../styles/variable.scss';
+
+.footer{
+    display: flex;
+
+    &__info{
+        background-color: $color-dark-500;
+        padding: 9rem 0 ;
+        display: flex;
+        justify-content: space-evenly;
+
+        &-block{
+            color: $color-primary;
+        }
+
+    }
+
+    &__title{
+        font-family: "Cinzel", serif;
+        display: inline-block;
+
+        &--sm{
+            margin-bottom: 1.3rem;
+            font-size: 1.4rem;
+        }
+        &--lg{
+            line-height: 1.2;
+            margin-bottom: 3.5rem;
+        }
+    }
+
+    &__list{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        &-item{
+            color: $color-dark-100;
+            font-size: 1.2rem;
+            cursor: pointer;
+
+            &:hover{
+                text-decoration: underline;
+            }
+            &:not(:last-child){
+                margin-bottom: .75rem;
+            }
+        }
+    }
+
+
+    &__news{
+        background-color: $color-primary;
+        padding: 9rem 0;
+        color: $color-dark-500;
+        display: flex;
+        justify-content: center;
+
+        &-content{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 50%;
+        }
+    }
+
+    &__input{
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        input{
+            border: none;
+            border-bottom: 1px solid $color-dark-500;
+            padding: .75rem 0;
+            background-color: transparent;
+            width: 100%;
+            transition: all .2s;
+            
+            &:-webkit-autofill{
+                -webkit-box-shadow: 0 0 0px 1000px $color-primary inset; 
+                box-shadow: 0 0 0px 1000px $color-primary inset; 
+
+            }
+            &:focus{
+                outline: none;
+                border-bottom: 1px solid $color-accent-dark;
+            }
+
+        }
+
+        &-icon{
+            //position: absolute;
+            width: 2rem;
+            height: 2rem;
+            margin-left: -2rem;
+            transition: transform .3s;
+            cursor: pointer;
+
+            &:hover{
+                transform: scale(1.4);
+                fill: $color-accent-dark;
+            }
+        }
+    }
+
+
+}

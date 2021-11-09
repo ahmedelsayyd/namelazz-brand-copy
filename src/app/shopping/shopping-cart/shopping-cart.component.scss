@@ -1,0 +1,100 @@
+@import "../../../styles/variable.scss";
+
+.empty-cart{
+
+    background-color: $color-primary;
+    padding: 14rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+    &__content{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__icon{
+
+
+        svg{
+            width: 3rem;
+            height: 3rem;
+            fill: $color-dark-500;
+        }
+    }
+
+    &__title{
+        font-family: 'cinzel', serif;
+        font-size: 2rem;
+        margin: 3rem 0 4rem;
+    }
+}
+
+.cart{
+    background-color: $color-primary;
+    padding: 14rem 0;
+
+    .sub-heading{
+        font-size: 4rem;
+    }
+    &__route{
+        margin-bottom: 1rem;
+    }
+
+    &__total{
+        padding: 4rem;
+        margin-top: 1.5rem;
+        border: 1px solid rgba($color-dark-500, .4);
+
+        span{
+            display: inline-block;
+        }
+    }
+
+    &__sub-total,
+     &__shipping,
+     &__coupon{
+        color: $color-dark-100;
+        margin-bottom: .5rem;
+
+    }
+
+    .value{
+        font-weight: 600;
+        color: $color-dark-200;
+        font-family: "Cinzel", serif;
+    }
+
+    &__total-price{
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        color: $color-dark-200;
+    }
+
+    &__discCode{
+        margin-bottom: 1.5rem;
+
+        input{
+            width: 90%;
+            border: 1px solid $color-dark-100;
+            padding: 0rem 1.75rem;
+            outline: none;
+
+            &:focus{
+                border: 1px solid $color-accent;
+
+            }
+        }
+
+        
+
+    }
+
+    &__submit{
+        
+    }
+
+
+}

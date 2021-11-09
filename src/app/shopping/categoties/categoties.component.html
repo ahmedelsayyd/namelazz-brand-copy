@@ -1,0 +1,45 @@
+
+<div class="category">
+    <div class="container">
+        <div class="row">
+            <div class="category__heading">
+                <span class="category__heading--sub paragraph paragraph--short">main page / <strong>catalog</strong></span>
+                <h3 class="category__heading--main sub-heading"> Catalog</h3>
+                <hr class="m-0">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2 pl-0 pr-4">
+                <div class="category__filter">
+                    <div class="category__filter-list">
+                        <ul>
+                            <li class=""><a class="" routerLink="/catalog/all" routerLinkActive="active" router>All</a></li>
+                            <li class=""><a class="" routerLink="/catalog/dresses" routerLinkActive="active">Dresses</a></li>
+                            <li class=""><a class="" routerLink="/catalog/shirts&blows" routerLinkActive="active">Shirts & Blows</a></li>
+                            <li class=""><a class="" routerLink="/catalog/outer-Wear" routerLinkActive="active">Outer Wear</a></li>
+                            <li class=""><a class="" routerLink="/catalog/jackt&sleeveless" routerLinkActive="active">Jackt &sleeveless</a></li>
+                            <li class=""><a class="" routerLink="/catalog/tops&bodysuits" routerLinkActive="active">Tops & bodysweets</a></li>
+                            <li class=""><a class="" routerLink="/catalog/suits" routerLinkActive="active">Suits</a></li>
+                            <li class=""><a class="" routerLink="/catalog/t-shirt&tops" routerLinkActive="active">T-shirt & tops</a></li>
+                            <li class=""><a class="" routerLink="/catalog/trousers&shorts" routerLinkActive="active">Trousers & shorts</a></li>
+                            <li class=""><a class="" routerLink="/catalog/skirts" routerLinkActive="active">Skirts</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-10">
+                <div class="category__products">
+                    <div class="row">
+                        <div class="col-md-4 mb-5" *ngFor="let p of filterProducts">
+                            <product-card [product]="p" [loadedComponent]="'categories'"></product-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="soon">
+    <div class="container">
+        <div class="row">
+            <div class="soon__heading">
+                <div class="paragraph paragraph--short mb-2">main page / <strong>soon</strong></div>
+                <h3 class="soon__heading--main sub-heading"> soon </h3>
+                <hr class="m-0">
+            </div>
+        </div>
+        
+        <div class="soon__products" >
+            <div class="row">
+                <div class="col-md-3" *ngFor="let product of soonProducts">
+                    <product-card [product]= "product" [loadedComponent]="'soon'"></product-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

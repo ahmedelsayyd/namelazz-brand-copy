@@ -1,0 +1,187 @@
+
+@import "../../../styles/variable.scss";
+
+.register{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__card{
+        width: 100%;
+        height: 100%;
+        font-size: 1.4rem;
+        //background-color: rgba($color-primary, .7);
+        background-color: $color-primary;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        color: $color-dark-500;
+        padding: 14rem 0 3rem;
+        position: relative;
+    }
+
+    &__icon{
+        width: 2.6rem;
+        height: 2.6rem;
+        cursor: pointer;
+
+        &--user{
+            width: 4rem;
+            height: 4rem;
+            margin-bottom: 1rem;
+            fill: $color-accent;
+        }
+
+    }
+
+    &__title{
+        text-transform: uppercase;
+        margin-bottom: 3rem;
+        font-family: "Cinzel", serif;
+        font-size: 1.6rem;
+        font-weight: 700;
+    }
+
+    &__sub__title{
+        margin-bottom: 1.3rem;
+    }
+
+    &__form{
+        width: 33rem;
+
+        .form{
+
+            input.ng-touched.ng-invalid{
+                border: 1px solid $color-accent-danger;
+           }
+           
+            &__group{
+                margin-bottom: .8rem;
+                display: flex;
+                flex-direction: column;
+                
+
+                    
+                .input-requirments--hint{
+                    color: $color-dark-500;
+                    font-size: 1.25rem;
+                    transition: all .2s;
+                }
+
+                .input-requirments--error{
+                    color: $color-accent-danger;
+                }
+
+                .show{
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+
+                .hide{
+                    opacity: 0;
+                    transform: translateY(-4rem);
+                }
+            }
+    
+
+    
+            &__actions{
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+            }
+    
+            &__submit__button{
+                padding: 1rem 5rem;
+                margin-top: 2.3rem;
+                background-color: $color-accent;
+                border: none;
+                color: $color-primary;
+                text-decoration: none;
+                cursor: pointer;
+                text-transform: uppercase;
+                font-size: 1.3rem;
+    
+                &:link,
+                &:visited{
+                    color: $color-primary;
+                    
+                }
+    
+                &:hover{
+                    background-color: $color-accent-dark;
+                }
+    
+            }
+    
+            &__forget__password{
+                color: $color-accent;
+    
+                &:hover{
+                    color: $color-accent-dark;
+                }
+            }
+        }
+        
+    }
+
+    &__to-login{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin: 3rem 0 3rem;
+        .policy,
+        .policy:link,
+        .policy:visited,
+        .policy:active{
+            color: $color-dark-500;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .login__link{
+            color: $color-accent;
+            cursor: pointer;
+            text-decoration: underline;
+
+            &:link,
+            &:visited{
+                color: $color-accent;
+                
+            }
+
+            &:hover{
+                color: $color-accent-dark;
+            }
+        }
+    }
+
+    &__with-social{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        .social__logos{
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            li:not(:last-child){
+                margin-right: 1rem;
+            }
+
+            img{
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+}

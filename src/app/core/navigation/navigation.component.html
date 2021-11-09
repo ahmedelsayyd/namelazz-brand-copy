@@ -1,0 +1,190 @@
+<nav class="navigation">
+    <div class="row h-100 m-0">
+        <div class="col-md-3 h-100 navigation__group">
+            <div class="navigation__menu" (click)="openSideNav($event)">
+                <svg class="navigation__menu__icon" width="35" height="13" viewBox="0 0 35 13" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="1" width="33" height="1"></rect>
+                    <rect x="3" y="6" width="20" height="1"></rect>
+                    <rect x="3" y="11" width="10" height="1"></rect>
+                </svg>
+            </div>
+            <div class="navigation__logo">
+                <svg id="logo" routerLink="/">
+                    <use xlink:href="../../../assets/img/sprite.svg#icon-logo"></use>
+                </svg>
+            </div>
+        </div>
+    
+        <!-- navigation tabs -->
+        <div class="col-md-6 h-100">
+            <ul class="navigation__tabs">
+                <a class="navigation__link" routerLink="/new"><li>new</li></a>
+                <a class="navigation__link" routerLink="/catalog"><li>catalog</li></a>
+                <a class="navigation__link" routerLink="/soon"><li>soon</li></a>
+                <a class="navigation__link" routerLink="/sale"><li>sale</li></a>
+                <a class="navigation__link" routerLink="/artbook"><li>ArtBook</li></a>
+            </ul>  
+        </div> 
+
+        <!--  navigation icons -->
+
+        <div class="col-md-3 h-100">
+            <ul class="navigation__user">
+                <a class="navigation__user__actions"><li>
+                    <svg class="navigation__icon">
+                        <use xlink:href="../../../assets/img/sprite.svg#icon-paperplane"></use>
+                    </svg>
+                </li></a>
+
+                <a class="navigation__user__actions"><li>
+                    <svg class="navigation__icon">
+                        <use xlink:href="../../../assets/img/sprite.svg#icon-search"></use>
+                    </svg>
+                </li></a>
+
+                <a class="navigation__user__actions position-relative" routerLink="/favorites">
+                    <nz-badge 
+                    class="dot position-absolute"
+                    nzStandalone 
+                    [nzDot]="true"
+                    [nzStyle]="{ backgroundColor: '#db1a20'}"
+                    *ngIf="(favProductsCount$ | async) > 0"
+                    >
+                    </nz-badge>
+
+                    <li>
+                        <svg class="navigation__icon star" >
+                            <use xlink:href="../../../assets/img/sprite.svg#icon-star-la"></use>
+                        </svg>
+                    </li>
+                </a>
+                
+                <a class="navigation__user__actions navigation__icon--user" 
+                    routerLink="/user/account"
+                    (click)="loginCardState($event)">
+                    <li>
+                        <svg class="navigation__icon ">
+                            <use xlink:href="../../../assets/img/sprite.svg#icon-user"></use>
+                        </svg>
+                    </li>
+                </a>
+
+                <a class="navigation__user__actions position-relative" routerLink="/cart">
+                    <nz-badge 
+                    class="position-absolute"
+                    nzStandalone 
+                    [nzCount]="(cart$ | async)?.totalItemsCount"
+                    [nzStyle]="{ backgroundColor: '#db1a20'}" 
+                    *ngIf="((cart$ | async)?.totalItemsCount) > 0">
+                    </nz-badge>
+                    <li>
+                        <svg class="navigation__icon">
+                            <use xlink:href="../../../assets/img/sprite.svg#icon-shopping-bag"></use>
+                        </svg>
+                    </li>
+                </a>
+                
+
+            </ul>  
+        </div>
+    </div>
+</nav>
+
+<!-- --------------------------------------
+---------------LOGIN POPUP------------- -->
+
+<div class="login" >
+    <div class="login__card" [@toggoleLoginCard]="(showLoginCard | async) ? 'show' : 'hide' ">
+            <svg class="login__icon login__icon--close" stopPrpagation (click)="this.uiService.ToggoleLoginCard.next(false)">
+                <use xlink:href="../../../assets/img/sprite.svg#icon-clear"></use>
+            </svg>
+            
+            <svg class="login__icon login__icon--user">
+                <use xlink:href="../../../assets/img/sprite.svg#icon-user"></use>
+            </svg>
+       
+            <span class="login__title ">Authorization</span>
+
+            <form class="login__form" (onSubmit)="login(loginForm, $event)" #loginForm="ngForm">
+                <div class="form__group">
+                    <label class="form__lable" for="email">Email</label>
+                    <input class="form__input" 
+                    [ngClass]="(loginForm.submitted && !email.touched) ? 'notValid': ''"
+                    type="email" name="email" 
+                    id="email" 
+                    placeholder="Enter your email"
+                    required
+                    ngModel
+                    #email= "ngModel" >
+                    
+                    <span class="input-requirments input-requirments--error " 
+                        *ngIf="(email.value?.length < 1) &&
+                        ((email.errors?.required && email.touched) || (loginForm.submitted && !email.touched) || emailInputfilled)">&#9679; This field is required
+                    </span>
+                </div>
+
+                <div class="form__group">
+                    <label class="form__lable" for="password">Password</label>
+                    <input class="form__input" 
+                    [ngClass]="(loginForm.submitted && !password.touched) ? 'notValid': ''"
+                    type="password" 
+                    name="password" 
+                    id="password"
+                    required
+                    ngModel
+                    #password= "ngModel" 
+                    placeholder="Enter your password">
+                    
+                    <span class="input-requirments input-requirments--error"
+                        *ngIf="(password.value?.length < 1) && loginForm.submitted && !password.touched">&#9679; This field is requierd
+                    </span>   
+                </div>
+
+                <div class="form__actions">
+                    <button type="submit" 
+                    class="form__submit__button"
+                    (click)="login(loginForm, $event)"
+                    >Login</button>
+
+                    <a class="form__forget__password" (click)="forgetPassword(email.value, $event)">Forget Password.?</a>
+                </div>
+            </form>
+
+            <div class="login__register">
+                <span class="login__sub__title">You Dont Have An Account</span>
+                <a class="login__register__button" routerLink="/signup" stopPropagation (click)="this.uiService.ToggoleLoginCard.next(false)">creat an account</a>
+            </div>
+
+
+            <div class="login__with__social">
+                <span class="login__sub__title">Authorization Through Social Network</span>
+                <ul class="social__logos">
+                    <li>
+                        <a>
+                            <svg class="login__icon">
+                                <use xlink:href="../../../assets/img/sprite.svg#icon-facebook"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a >
+                            <div class="login__icon">
+                                <img src="../../../assets/img/instagram.svg" alt="">
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a >
+                            <svg class="login__icon">
+                                <use xlink:href="../../../assets/img/sprite.svg#icon-twitter"></use>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+    </div>
+
+</div>
+
+
+

@@ -1,0 +1,58 @@
+@import '../../../../styles/variable.scss';
+
+.product{
+    display: flex;
+    flex-direction: column;
+    //padding: 0 2rem;
+    // height: 42rem;
+    overflow: hidden;
+    
+    &__image{
+        width: 100%;
+        cursor: pointer;
+        // height: 34rem;
+        transition: all .4s;
+        
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    // &:hover &__image{
+    //     height: 28.5rem;
+    // }
+
+    &__details{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 2rem;
+        height: 3.2rem;
+        cursor: pointer;
+    }
+
+    &__name{
+
+    }
+
+    &__price{
+        font-size: 2rem;
+        font-weight: 500;
+        font-family: "Cinzel", serif;
+    }
+
+    &__button{
+        display: none;
+        opacity: 0;
+        transition: all .6s;
+        
+    }
+
+    &:hover &__button{
+        display: block;
+        opacity: 1;
+    }
+
+    
+}

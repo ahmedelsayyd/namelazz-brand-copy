@@ -1,0 +1,38 @@
+<h2 class="text">products</h2>
+<div class="products">
+    <div class="row">
+        <nz-table class="products-table" #productsTable [nzData]="products" [nzLoading]="settingValue.loading" nzShowPagination>
+            <thead class="thead">
+              <tr>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>price</th>
+                <th>stock</th>
+                <th>sold</th>
+                <th>Revenew</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of productsTable.data">
+                <td class="product-info">
+                  <span class="product-photo">
+                    <img [src]="product.images[0]" alt="">
+                  </span>
+                  {{ product.name.toLowerCase() }}
+                </td>
+                <td>{{ product.category }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.stock }}</td>
+                <td>{{ product.sold }}</td>
+                <td>{{ product.revenew }}</td>
+                <td>
+                  <a class="btn-edit" [routerLink]="['/admin/dashboard/products', product.id,'edit']">Edit</a>
+                  <nz-divider nzType="vertical"></nz-divider>
+                  <a class="btn-delete" nz-popconfirm nzPopconfirmTitle="Sure to delete?" (nzOnConfirm)="deleteProduct(product.id)">Delete</a>
+                </td>
+              </tr>
+            </tbody>
+          </nz-table>
+    </div>
+</div>

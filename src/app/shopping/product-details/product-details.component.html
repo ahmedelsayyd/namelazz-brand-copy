@@ -1,0 +1,145 @@
+<div class="product-details">
+    <div class="container">
+        <span class="path paragraph paragraph--short">main page/catalog/<strong>outer clothing</strong></span>
+        <div class="product">
+            <div class="row">
+
+
+                <div class="col-md-6">
+                    <div class="product__images-wraper">
+                        <!-- <div  class="swiper-slide">
+                            <img class="img" src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                        </div> -->
+    
+                        <div #thumbImageContainer class="product__thumbs-image">
+                            <div  class="swiper-slide" *ngFor="let img of product?.images; let i =index">
+                                <img #thumbImage
+                                [ngClass]="(i == 0) ? 'active' : '' " 
+                                [src]="img" 
+                                (click)="showImage(thumbImage.src)"/>
+                            </div>
+                        </div>
+                        <div class="product__main-image">
+                            <img #mainImage class="" [src]="product?.images[0]" />
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="product__info">
+                        <div class="product__sub-name paragraph paragraph--short">{{ productNameSplit(product?.name, " ", 5, "sub") }}</div>
+                        <h2 class="product__name sub-heading">{{ productNameSplit(product?.name, " ", 2, "main") }}</h2>
+                        <div class="product__price">{{product?.price | currency : 'RUB': 'symbol-narrow':'3.0' : 'ru'}}</div>
+                        <div class="product__colors">
+                            <div class="text">Colors</div>
+                            <ul #colorsList class="colors-list">
+                                <li class="color-wraper" *ngFor="let color of productColors; let i =index" [class.active]="i== 0">
+                                    <span #productColorElms (click)="selectColor(color.name)" class="color-item" [attr.data-color]="color.name"></span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="product__sizes">
+                            <div class="text">Sizes</div>
+                            <ul #sizesList class="sizes-list">
+                                <li *ngFor="let size of product?.sizes; let i =index"
+                                    (click)="selectSize(size)"
+                                    [attr.data-size]="size" 
+                                    class="size">{{size}}</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="product__actions">
+                        <button class="button button--lg" 
+                        (click)="addToCart()" 
+                        *ngIf="!product?.inCart" 
+                        trackFocus [isSelected]="selectedSize ? true : false">
+                        ADD TO CART</button>
+
+                        <button class="button button--lg button--transparent" *ngIf="product?.inCart" routerLink="/cart">CHECK OUT</button>
+                        
+                        <button class="btn-to-fav" [ngClass]="{'active': product?.isFavorite === true}"  (click)="addToFavorite(product)">
+                            <svg class="fav">
+                                <use xlink:href="../../../assets/img/sprite.svg#icon-star-la"></use>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="product__related-info">
+                        <ul class="product__related-info-list">
+                            <li class="paragraph paragraph--md" 
+                                [ngClass]="loadedText === 'details' ? 'active' : '' " 
+                                (click)= "showText('details')">Product details</li>
+
+                            <li class="paragraph paragraph--md" 
+                                [ngClass]="loadedText === 'shipping' ? 'active' : '' "
+                                (click)= "showText('shipping')">Shipping And Returns</li>
+
+                            <li class="paragraph paragraph--md" 
+                                [ngClass]="loadedText === 'recommends' ? 'active' : '' "
+                                (click)= "showText('recommends')">Recommends For Care</li>
+                        </ul>
+                        <p class="product__related-info-text paragraph paragraph--md" *ngIf="loadedText === 'details'">
+                            <span>-midi length;</span>
+                            <span>-flowing fabric;</span>
+                            <span>-long set-in sleeves;</span>
+                            <span>-side pockets;</span>
+                            <span>-high vent;</span>
+                            <span>-belt;</span>
+                            <span>-lined.</span>
+                        </p>
+
+                        <p class="product__related-info-text paragraph paragraph--md" *ngIf="loadedText === 'shipping'">
+                            Transport company DHL - courier to the door
+                            You can pay by card
+                        </p>
+                        <p class="product__related-info-text paragraph paragraph--md" *ngIf="loadedText === 'recommends'">
+                            <span>-delicate hand or machine wash up to 30°C/86F;</span>
+                            <span>-dry-cleaning;</span>
+                            <span>-don’t bleach;</span>
+                            <span>-don’t tumble dry;</span>
+                            <span>-iron at a temperature of up to 110°C/230F;</span>
+                            <span>-avoid physical impact (intensive friction on a surface, tough bag straps, etc.).</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+    </div>
+
+    <div class="related-products">
+        <div class="container">
+            <div class="row">
+                <h2 class="related-products__heading sub-heading">you may also like this items</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-3" *ngFor="let product of similarProducts">
+                    <product-card [loadedComponent]="'details'" [product]="product"></product-card>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="instagram">
+            <div class="intagram-icon">
+
+            </div>
+            <h2 class="sub-heading">follow Us On instagram</h2>
+            <div class="instagram-handel  paragraph paragraph--short">&#64;namelazz</div>
+        </div>
+    </div>
+
+
+    <div class="gallary">
+        <div class="row no-gutters">
+            <div class="col-md-3"><img src="../../../../assets/img/home/gallery-1.jpg" alt=""></div>
+            <div class="col-md-3"><img src="../../../../assets/img/home/gallery-2.jpg" alt=""></div>
+            <div class="col-md-3"><img src="../../../../assets/img/home/gallery-3.jpg" alt=""></div>
+            <div class="col-md-3"><img src="../../../../assets/img/home/gallery-4.jpg" alt=""></div>
+        </div>
+    </div>
+</div>

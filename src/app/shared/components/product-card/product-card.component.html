@@ -1,0 +1,55 @@
+
+<div class="product" *ngIf="product">
+
+    <div class="product__image" (click)="toProductDetails(product.id)">
+        <!-- <img src="../../../../assets/img/product1.jpg" alt="" class="product__image"> -->
+        <img [src]="product.images[0]" alt="" class="">
+
+    </div>
+    <div class="product__details" (click)="toProductDetails(product.id)">
+        <span class="product__name paragraph paragraph--short">{{product.name}}</span>
+        <span class="product__price">{{product.price | currency : 'RUB': 'symbol-narrow':'3.0' : 'ru'}}</span>
+    </div>
+    <div class="line mt-3 mb-4"></div>
+
+
+
+    <div class="product__button" *ngIf="!product.inCart">
+        <button class="button button--w-full" (click)="addToCart(product)">Add To Cart</button>
+    </div>
+
+    <div class="product__button " *ngIf ="product.inCart">
+        <button class="button button--w-full button--transparent" (click)="checkOut()" routerLink="/cart">Check Out</button>
+    </div>
+
+    <a class="link link--bold"> 
+        <span class="link__name">Show More</span>
+        <svg class="link__arrow">
+            <use xlink:href="../../../assets/img/sprite.svg#icon-right-arrow"></use>
+        </svg>
+    </a>
+</div>
+
+
+
+
+<div class="product" *ngIf="loadedComponent === 'catalog'">
+    <div class="product__image">
+        <img [src]="catalogProduct.image" alt="" class="product__image">
+        <!-- <img [src]="product.images[0]" alt="" class="product__image"> -->
+
+    </div>
+    <div class="product__details">
+        <span class="product__name paragraph paragraph--short">{{catalogProduct.category}}</span>
+    </div>
+
+    <div class="line mt-3 mb-4">
+
+    </div>
+    <a class="link link--bold"> 
+        <span class="link__name" routerLink="/catalog/all">Show More</span>
+        <svg class="link__arrow">
+            <use xlink:href="../../../assets/img/sprite.svg#icon-right-arrow"></use>
+        </svg>
+    </a>
+</div>

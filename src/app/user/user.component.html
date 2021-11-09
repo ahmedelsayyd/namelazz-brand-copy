@@ -1,0 +1,31 @@
+<div class="profile">
+
+    <div class="profile__header">
+
+        <div class="container h-100">
+            <div class="profile__header-content">
+                <a class=" link profile__exit" (click)="logOut()">Exit</a>
+                <div class="profile__name">
+                    <span class="dash">ـــ</span>
+                    <span>Hi, AHMED</span>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="profile__nav w-100">
+            <div class="container h-100">
+                <ul class="profile__nav-list h-100 w-100 mb-0">
+                    <a class="link" routerLinkActive="active" routerLink="/user/account"><li >My Account</li></a>
+                    <a class="link" routerLinkActive="active" routerLink="/user/orders"><li >My Orders</li></a>
+                    <a class="link" routerLinkActive="active" routerLink="/user/subscriptions"><li >Wishlist</li></a>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="profile__content">
+        <router-outlet></router-outlet>
+    </div>
+</div>

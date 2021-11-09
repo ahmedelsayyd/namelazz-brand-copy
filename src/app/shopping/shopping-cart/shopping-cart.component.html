@@ -1,0 +1,68 @@
+<div class="empty-cart" *ngIf="cart?.totalItemsCount == 0">
+    <div class="empty-cart__content">
+        <div class="empty-cart__icon">
+            <svg class="">
+                <use xlink:href="../../../assets/img/sprite.svg#icon-shopping-bag"></use>
+            </svg> 
+        </div>
+        <div class="empty-cart__title">Your Cart Is Empty</div>
+        <button routerLink="/favorites" class="button button--lg button--transparent">Favorite Items</button>
+    </div>
+</div>
+
+
+
+
+<div class="cart" *ngIf="cart?.totalItemsCount > 0">
+    <div class="container">
+        <div class="row">
+            <div class="cart__route paragraph paragraph--short">main page / <strong>shopping cart</strong></div>
+        </div>
+        <div class="row">
+            <div class="col-md-7 pl-0">
+                <h3 class="sub-heading">Cart</h3>
+                <div class="cart__items">
+                    <div class="cart__item" *ngFor="let item of cart?.items">
+                        <cart-item [cartItem]= "item"></cart-item>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 offset-sm-1 pl-0">
+                <h3 class="sub-heading">Total</h3>
+                <div class="cart__total">
+                    <div class="cart__sub-total d-flex justify-content-between">
+                        <span>Subtotal</span>
+                        <span class="value">{{cart?.subTotalPrice | currency : 'RUB': 'symbol-narrow':'3.0' : 'ru'}}</span>
+                    </div>
+                    <div class="cart__shipping d-flex justify-content-between">
+                        <span>Shipping</span>
+                        <span class="value">{{cart?.shipping | currency : 'RUB': 'symbol-narrow':'3.0' : 'ru'}}</span>
+                    </div>
+
+                    <div class="cart__coupon d-flex justify-content-between" *ngIf="couponApplyed">
+                        <span>Coupon</span>
+                        <span class="value">-{{cart?.couponDisc | currency : 'RUB': 'symbol-narrow':'3.0' : 'ru'}}</span>
+                    </div>
+
+                    <div class="line my-5"></div>
+
+
+                    <div class="cart__total-price d-flex justify-content-between">
+                        <span>Total</span>
+                        <span class="value">{{cart?.totalPrice | currency : 'RUB': 'symbol-narrow':'3.0' : 'ru'}}</span>
+                    </div>
+
+                    <div class="cart__discCode d-flex justify-content-between">
+                        <input name="code" [(ngModel)]="couponInput"  #discCode="ngModel"  type="text" placeholder="discount code">
+                        <button class="button button--sm mr-0 ml-2" (click)="applyCouponDisc(discCode.value)" >Applay</button>
+                    </div>
+
+                    <div class="cart__submit">
+                        <button class="button button--w-full" routerLink="/cart/shipping">Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

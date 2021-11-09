@@ -1,0 +1,53 @@
+@import '../../../../styles/variable.scss';
+
+.pagination{
+
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+
+    &__btns-wrap{
+        display: flex;
+        margin: 0 .5rem;
+
+    }
+
+    &__btn{
+        width: 2.8rem;
+        height: 2.8rem;
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        font-family: "Cinzel", serif;
+
+
+        &:not(:last-child){
+            margin-right: 1.75rem;
+        }
+
+        &.active{
+            background-color: $color-dark-500;
+            color: $color-primary;
+        }
+
+        &:hover{
+            background-color: rgba($color-accent-dark, .2);
+            //color: $color-primary;
+        }
+    }
+
+    &__next,
+    &__prev{
+        border: none;
+        background-color: transparent;
+    }
+
+    &__arrow{
+        width: 1.6rem;
+        height: 1.6rem;
+        fill: rgba($color-dark-500, .6);
+    }
+}

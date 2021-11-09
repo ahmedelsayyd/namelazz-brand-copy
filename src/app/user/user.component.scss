@@ -1,0 +1,72 @@
+@import "../../styles/variable.scss";
+
+.profile{
+    // padding-top: 8rem;
+    background-color: $color-primary;
+    color: $color-primary;
+
+    &__header{
+        height: 38rem;
+        background-image: url(../../assets/img/profile-bg_1.jpg);
+        background-position: center;
+        background-size: cover;
+        position: relative;
+        padding-top: 10.5rem;
+
+        &-content{
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+    }
+
+    &__name{
+        display: flex;
+        flex-direction: column;
+        font-size: 2.25rem;
+        color: inherit;
+
+    }
+
+    &__exit{
+        align-self: flex-end;
+        color: inherit;
+    }
+
+    &__nav{
+
+        height: 5.5rem;
+        -webkit-backdrop-filter: blur(3px);
+        backdrop-filter: blur(10px);
+        background: linear-gradient(
+            0deg,rgba(0,0,0,.1),rgba(0,0,0,.1));
+            
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+        &-list{
+            list-style: none;
+            display: flex;
+            align-items: center;
+            height: 4rem;
+
+
+            a{
+                color: inherit;
+                height: 100%;
+                padding: 2rem 3rem;
+                border: .5px solid transparent;
+
+                transition: all .2s;
+                &:hover, &.active{
+                    background-color: rgba($color-dark-500, .3);
+                    // border: .5px solid $color-accent-dark;
+                    //color: $color-dark-500;
+                }
+            }
+
+        }
+    }
+
+}

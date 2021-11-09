@@ -1,0 +1,56 @@
+<div class="item">
+
+  
+  <div class="line my-4"></div>
+
+  <svg class="item__close-icon"  (click)="deleteItem(cartItem.id)">
+    <use xlink:href="../../assets/img/sprite.svg#icon-clear"></use>
+  </svg>
+
+    <div class="item__wraper d-flex">
+        <div class="item__image">
+            <img [src]="cartItem.imageUrl" alt="">
+        </div>
+        <div class="item__details">
+            <div class="item__name d-flex flex-column">
+              <span class="item__name--sub">{{productNameSplit(cartItem.name, " ", 5, "sub")}}</span>
+              <h3 class="item__name--main">{{productNameSplit(cartItem.name, " ", 2, "main")}}</h3>
+<!--               
+                <span class="item__name--sub">{{splitString(cartItem.name, " ", 5, "sub")}}</span>
+                <h3 class="item__name--main">{{splitString(cartItem.name, " ", 2, "main")}}</h3> -->
+            </div>
+            <div class="item__info d-flex">
+
+                <div class="color">{{cartItem.color[0]}}</div>
+                 
+                <div class="size"> 
+                    <a nz-dropdown [nzDropdownMenu]="menu" >
+                        Size-{{selectedSize}}
+                        <i nz-icon nzType="down"></i>
+                      </a>
+                      <nz-dropdown-menu #menu="nzDropdownMenu">
+                        <ul nz-menu nzSelectable *ngFor="let size of cartItem.size">
+                          <li nz-menu-item (click)="setSize(size)">{{size}}</li>
+                        </ul>
+                      </nz-dropdown-menu>
+                </div>
+
+                <div class="quantity">
+                    <a nz-dropdown [nzDropdownMenu]="qtymenu">
+                        Qnt-{{selectedQty}}
+                        <i nz-icon nzType="down"></i>
+                      </a>
+                      <nz-dropdown-menu #qtymenu="nzDropdownMenu">
+                        <ul nz-menu nzSelectable *ngFor="let qty of qtyArr">
+                          <li nz-menu-item (click)="setQty(qty)">{{qty}}</li>
+                        </ul>
+                      </nz-dropdown-menu>
+                </div>
+
+            </div>
+            <div class="item__price">
+                <p>{{cartItem?.totalItemPrice | currency : 'RUB': 'symbol-narrow':'3.0' : 'ru'}}</p><br>                 <i nz-icon nzType="down"></i>
+            </div>
+        </div>
+    </div>
+</div>

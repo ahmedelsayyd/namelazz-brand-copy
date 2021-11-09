@@ -1,0 +1,59 @@
+<div class="login">
+
+    <div class="login__card">
+
+        <svg class="login__icon login__icon--user">
+            <use xlink:href="../../../assets/img/sprite.svg#icon-user"></use>
+        </svg>
+   
+
+        <span class="login__title">Login</span>
+
+        <form class="login__form" (onSubmit)="login(loginForm)" #loginForm="ngForm">
+     
+            <div class="form__group">
+                <label class="label" for="email">Email</label>
+                <input class="input input--w-full" 
+                [ngClass]="(loginForm.submitted && !email.touched) ? 'notValid': ''"
+                type="email" name="email" 
+                id="email" 
+                required
+                placeholder="Enter your Email"
+                ngModel
+                [attr.data-val]="email.value"
+                #email= "ngModel" >
+                
+                <span class="input-requirments input-requirments--error " 
+                    *ngIf="(email.value?.length < 1) &&
+                    ((email.errors?.required && email.touched) || (loginForm.submitted && !email.touched))">&#9679; This field is required
+                </span>
+            </div>
+
+
+
+            
+            <div class="form__group">
+                <label class="label" for="password">Password</label>
+                <input class="input input--w-full" 
+                [ngClass]="(loginForm.submitted && !password.touched) ? 'notValid': ''"
+                type="password" 
+                name="password" 
+                id="password"
+                placeholder="Enter your Password"
+                required
+                ngModel
+                [attr.data-val]="password.value"
+                #password= "ngModel">
+                
+                <span class="input-requirments input-requirments--error"
+                    *ngIf="(password.value?.length < 1) && loginForm.submitted && !password.touched">&#9679; This field is requierd
+                </span>   
+            </div>
+
+            <div class="form__group">
+                <button type="submit" class="button button--w-full mt-1" (click)="login(loginForm)">Login</button>
+            </div>
+
+        </form>
+    </div>
+</div>

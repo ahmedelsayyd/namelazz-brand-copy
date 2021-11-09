@@ -1,0 +1,35 @@
+<div class="order">
+    <div class="container">
+
+        <ul class="order__list d-flex flex-column" >
+            <li class="order__item py-4" *ngFor="let order of orders">
+    
+                <div class="order__info d-flex align-items-center">
+                    <div class="order__num mr-4"> ORDER {{order.orderNumber}}</div>
+                    <p class="order__date paragraph paragraph--short mb-0 mr-5">{{formatDate(order.datePlaced)}}</p>
+                    <div class="order__product mr-auto">
+                        <ul class="d-flex" >
+                            <li class="order__product-img mr-2" *ngFor="let item of order.items">
+                                <img [src]="item.product.imageUrl" alt="">
+                            </li>
+                            <!-- <li class="order__product-img mr-2">
+                                <img src="../../../assets/img/product1.jpg" alt="">
+                            </li> -->
+                        </ul>
+                    </div>
+
+                    <ng-container [ngSwitch]="order.status">
+                        <div class="order__status mr-4 text-warning" *ngSwitchCase="'pinnding'">pinnding</div>
+                        <div class="order__status mr-4 text-success" *ngSwitchCase="'delivered'">Delivered</div>
+                        <div class="order__status mr-4 text-danger" *ngSwitchCase="'canceled'">Canceled</div>
+                        <div class="order__status mr-4 text-primary" *ngSwitchDefault>Waiting</div>
+                    </ng-container>
+
+                    <button class="button button--md button--transparent py-2 mr-0">Detailes</button>
+                </div>
+    
+            </li>
+        </ul>
+
+    </div>
+</div>

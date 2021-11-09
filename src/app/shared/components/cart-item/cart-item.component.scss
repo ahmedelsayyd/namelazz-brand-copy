@@ -1,0 +1,76 @@
+@import "../../../../styles/variable.scss";
+
+.item{
+    position: relative;
+
+    &__close-icon{
+        width: 1.75rem;
+        height: 1.75rem;
+        cursor: pointer;
+        position: absolute;
+        right: 3rem;
+        top: 1.75rem;
+        fill: $color-dark-500;
+    }
+
+    &__wraper{
+    }
+
+    &__image{
+        width: 13rem;
+        margin-right: 2rem;
+
+        img{
+            width: 100%;
+        }
+    }
+
+    &__details{
+
+    }
+
+    &__name{
+ 
+        &--main{
+            color: #1a1615;
+            font-family: "Cinzel", serif;
+            font-size: 2.3rem;
+            font-weight: 500;
+        }
+
+        &--sub{
+            font-family: "Raleway", sans-serif;
+            color: $color-dark-100;
+            font-size: 1.6rem;
+            text-transform: lowercase;
+        }
+    }
+
+    &__info{
+
+        & > div{
+            margin-right: 1rem;
+            color: $color-dark-100;
+        }
+
+        & a{
+            color: $color-dark-100;
+        }
+
+    }
+
+    &__price{
+        font-size: 2rem;
+        font-weight: 500;
+        font-family: "Cinzel", serif;
+        
+        p{
+            display: inline-block;
+            // &::first-letter{
+            //     padding-right: .7rem;
+            // }
+        }
+    }
+
+
+}

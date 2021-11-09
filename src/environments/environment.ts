@@ -1,9 +1,19 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+import 'zone.js/dist/zone-error';
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyB962rvQ5Yc3wb9a0rDANLMHzYCRyfC7bA",
+    authDomain: "namelazz-brand.firebaseapp.com",
+    projectId: "namelazz-brand",
+    storageBucket: "namelazz-brand.appspot.com",
+    messagingSenderId: "110544957935",
+    appId: "1:110544957935:web:9f2084cd02ad4f7769861a",
+    measurementId: "G-PEC889FW95"
+  }
 };
 
 /*

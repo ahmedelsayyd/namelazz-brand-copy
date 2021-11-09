@@ -1,0 +1,112 @@
+<div class="contacts">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="contacts__info">
+                    <h3 class="sub-heading sub-heading--md mb-6" >Contacts</h3>
+                    <h3 class="sub-heading sub-heading--sm " >Online Shop</h3>
+                    <p class="mb-0"> <a class="link" href="tel:+78007077104">+7 (800) 707-71-04<br></a> in Russia</p>
+                    <p class="mb-0"><a class=" link" href="mailto:info@namelazz.com">info@namelazz.com</a></p>
+                    <p class="mb-0"><a class=" link" href="https://www.instagram.com/namelazz/" target="_blank" rel="nofollow">We are in Instagram
+                        @namelazz</a></p>
+                </div>
+            </div>
+    
+            <div class="col-md-6">
+                <div class="contacts__feedback">
+                    <h3 class="sub-heading sub-heading--md mb-6" >Feedback</h3>
+                    <form class="form" #form (onSubmit)="submit(form.value)">
+    
+                        <div class="form__group position-relative">
+                            <input class="input input--underline input--w-lg" [attr.data-val]="name.value" type="text" id="name"
+                             name="name" #name ngModel>
+    
+                            <label class="animate-label mb-0" for="name">Name</label>
+                        </div>
+    
+    
+                        <div class="form__group position-relative">
+                            <input class="input input--underline input--w-lg" [attr.data-val]="phone.value" type="phone" id="phone" 
+                             name="phone" #phone ngModel>
+    
+                            <label class="animate-label mb-0" for="phone">Phone</label>
+                        </div>
+                        
+    
+                        <div class="form__group position-relative">
+                            <input class="input input--underline input--w-lg" [attr.data-val]="email.value" type="email" id="email" 
+                             name="email" #email ngModel>
+    
+                            <label class="animate-label mb-0" for="email">Email</label>
+                        </div>
+    
+                        <div class="form__group position-relative">
+                            <textarea class="input input--underline input--w-lg" [attr.data-val]="message.value" type="textarea" id="textarea" 
+                             name="textarea" #message ngModel></textarea>
+    
+                            <label class="animate-label mb-0" for="textarea">Message</label>
+                        </div>
+    
+                        <div class="form__group">
+                            <button class="button button--lg" type="submit">send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row our-shops">
+            <div class="col-md-6">
+                <div class="our-shop">
+                    <div class="our-shop__info">
+                        <h3 class="mb-4">Moscow</h3>
+                        <div class="our-shop__adress paragraph">
+                            Kuznetsky Bridge 4/3 page 1, office 200.<br>
+                            Working hours: from 11:00 to 22:00 <br>
+                            <a class="link" href="tel:+78007077104">+7 (800) 707-71-04</a>
+                        </div>
+                    </div>
+
+                    <div class="our-shop__gallery"></div>
+                    
+
+                    <div class="our-shop__map mt-5">
+                        <agm-map [latitude]="lat" [longitude]="lng">
+                            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                          </agm-map>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="our-shop">
+                    <div class="our-shop__info">
+                        <h3 class="mb-4">Ekaterinburg</h3>
+                        <div class="our-shop__adress paragraph">
+                            st. Radishcheva, 25<br>
+                            Working hours: from 11:00 to 21:00<br>
+                            <a  class="link" href="tel:+78007077104">+7 (800) 707-71-04</a>
+                        </div>
+                    </div>
+
+                    <div class="our-shop__gallery">
+                        <!-- // "@angular-devkit/build-angular": "^13.0.1", -->
+                    </div>
+
+                    <div class="our-shop__map mt-5">
+                        <agm-map [latitude]="lat" [longitude]="lng">
+                            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                          </agm-map>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

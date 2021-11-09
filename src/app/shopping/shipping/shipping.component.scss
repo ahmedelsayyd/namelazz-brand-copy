@@ -1,0 +1,91 @@
+@import "../../../styles/variable.scss";
+
+.shipping{
+
+    background-color: $color-primary;
+    padding: 14rem 0;
+
+
+    &__order{
+        padding: 3.75rem;
+        margin-top: 1.5rem;
+        border: 1px solid rgba($color-dark-500, .4);
+    }
+
+    .form{
+        
+        &__group{
+            margin-bottom: 2rem;
+             gap: 4%;
+        }
+
+
+        &__tacbox{
+            color: rgba($color-dark-500, .7);
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+
+            label{
+                margin-bottom: 0;
+
+            }
+        }
+
+        .fees{
+            color: $color-dark-300;
+            font-family: 'cinzel', serif;
+            font-weight: 600;
+            margin-right: 55%;
+            
+        }
+
+        .invalid-feedback{
+            display: flex;
+            flex-direction: row;
+            gap: 23%;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: $color-accent-danger;
+            margin-top: -1.5rem;
+        }
+    }
+
+    ::ng-deep .first .line {display: none; };
+    ::ng-deep .item{
+        
+        &__close-icon{ width: 1.25rem; height: 1.25rem;}
+
+        &__image{ width: 8rem; margin-right: 1rem;}
+
+        &__name{
+ 
+            &--main{ font-size: 1.6rem; font-weight: 500; margin-bottom: 0;}
+            &--sub{ font-size: 1.2rem; }
+        }
+
+        &__info > div{ margin-right: .75rem; font-size: 1.3rem;}
+
+        &__price{ font-size: 1.5rem; }
+    
+    }
+
+    &__sub-total,
+     &__shipping,
+     &__coupon{
+        color: $color-dark-100;
+        margin-bottom: .5rem;
+
+    }
+
+    .value{
+        font-weight: 600;
+        color: $color-dark-200;
+        font-family: "Cinzel", serif;
+    }
+
+    &__total-price{
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        color: $color-dark-200;
+    }
+}

@@ -1,0 +1,307 @@
+@import "../../../styles/variable.scss";
+
+
+.navigation{
+    height: $nav-height;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 8;
+    border-bottom: 1px solid $nav-color;
+    background-color: $nav-background;
+    color: $nav-color;
+    fill: $nav-color;
+    transition: all .2s;
+
+    &__group{
+        align-items: center;
+        padding-left: 0;
+        display: flex;
+
+        & > div{
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    &__menu{
+        display: flex;
+        align-items: center;
+        border-right: 1px solid $nav-color;
+        height: 100%;
+        padding: 0 2rem;
+        cursor: pointer;
+
+        &__icon{
+            fill: $nav-color;
+        }
+    }
+
+    &__logo{
+        height: 100%;
+        cursor: pointer;
+        color: $nav-color;
+        #logo{
+            fill: $nav-color;
+            stroke: $nav-color;
+            stroke-width: .4px;
+            margin-left: 3.4rem;
+            height: 100%;
+            width: 18rem;
+            &:focus{
+                outline: none;
+            }
+        }
+    }
+
+    &__tabs{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.6rem;
+        height: 100%;   
+    }
+
+    &__link{
+        text-decoration: none;
+        color: $nav-color;
+        cursor: pointer;
+        &:not(:last-of-type){
+            margin-right: 4.3rem;
+        }
+    }
+
+    &__user{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        font-size: 1.6rem;
+        height: 100%;  
+
+        
+        .star{
+            stroke: $nav-color
+        }
+    }
+
+
+    &__user__actions{
+        text-decoration: none;
+        
+        &:not(:last-of-type){
+            margin-right: 2.1rem;
+        }
+    }
+
+    &__icon{
+        width: 1.75rem;
+        height: 1.75rem;
+        fill: $nav-color;
+        cursor: pointer;
+    }
+
+    nz-badge{
+        top: -1rem ;
+        right: -1.2rem;
+
+    }
+
+    nz-badge.dot{
+        top: 0.2rem;
+        right: 0.2rem;
+    }
+}
+
+
+/* LOGIN POPUP*/
+
+.login{
+    z-index: 11;
+
+
+    &__card{
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+
+        width: 35rem;
+        font-size: 1.4rem;
+        //background-color: rgba($color-primary, .7);
+        background-color: $color-primary;
+        box-shadow: 0 2rem 4rem  rgba($color-accent-dark, .25);
+        color: #9aaacf;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        color: $color-dark-500;
+        padding: 2rem 0;
+        z-index: 11;
+
+    }
+
+    &__icon{
+        width: 2.5rem;
+        height: 2.5rem;
+        cursor: pointer;
+
+        &--user{
+            width: 3rem;
+            height: 3rem;
+            margin-bottom: 1rem;
+            fill: $color-accent;
+        }
+
+        &--close{
+            position: absolute;
+            left: 1.5rem;
+            top: 1.5rem;
+            fill: $color-dark-500;
+        }
+    }
+
+    &__title{
+        text-transform: uppercase;
+        margin-bottom: 3rem;
+        font-family: "Cinzel", serif;
+        font-size: 1.8rem;
+    }
+
+    &__sub__title{
+        margin-bottom: .7rem;
+    }
+
+    &__form{
+        width: 75%;
+
+        .form{
+            &__group{
+                margin-bottom: 1rem;
+                flex-direction: column;
+            }
+    
+            &__input{
+                outline: 0;
+                padding: .5rem 1.75rem;
+                border: none;
+                border: 1px solid $color-accent;
+                background-color: rgba($color-primary, .9);
+                width: 100%;
+                transition: all .1s;
+
+                &::placeholder{
+                    color: $color-accent-dark;
+                    opacity: .6;
+                }
+
+                &:focus{
+                    border: 1px solid $color-accent-success;
+                }
+
+                &.ng-touched.ng-invalid{
+                    border: 1px solid $color-accent-danger;
+                }
+
+                &.notValid{
+                    border: 1px solid $color-accent-danger;
+                }
+            }
+    
+    
+            &__actions{
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end;
+            }
+    
+            &__submit__button{
+                padding: .8rem 2.4rem;
+                background-color: $color-accent;
+                border: none;
+                color: $color-primary;
+                text-decoration: none;
+                cursor: pointer;
+    
+                &:link,
+                &:visited{
+                    color: $color-primary;
+                    
+                }
+    
+                &:hover{
+                    background-color: $color-accent-dark;
+                }
+    
+            }
+    
+            &__forget__password{
+                color: $color-accent;
+    
+                &:hover{
+                    color: $color-accent-dark;
+                }
+            }
+        }
+        
+    }
+
+    &__register{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin: 3rem 0 3rem;
+
+        &__button{
+            padding: .8rem 2.4rem;
+            border: 1px solid $color-accent;
+            color: $color-dark-500;
+            text-decoration: none;
+            cursor: pointer;
+
+            &:link,
+            &:visited{
+                color: $color-dark-500;
+                
+            }
+
+            &:hover{
+                background-color: $color-accent;
+                color: $color-primary;
+            }
+        }
+    }
+
+    &__with__social{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        .social__logos{
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            li:not(:last-child){
+                margin-right: 1rem;
+            }
+
+            img{
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+}

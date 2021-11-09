@@ -1,0 +1,19 @@
+<div class="pagination">
+    <button class="pagination__prev"> 
+        <svg class="pagination__arrow">
+            <use xlink:href="../../../../assets/img/sprite.svg#icon-left-arrow"></use>
+        </svg>
+    </button>
+
+    <div class="pagination__btns-wrap">
+        <button [ngClass]="{'active': pagData?.currentPage == 1}" (click) ="setPaginate(1)" class="pagination__btn">1</button>
+        <button [ngClass]="{'active': pagData?.currentPage == 2}" (click) ="setPaginate(2)" class="pagination__btn">2</button>
+        <button [ngClass]="{'active': pagData?.currentPage == 3}" (click) ="setPaginate(3)" class="pagination__btn">3</button>
+    </div>
+
+    <button class="pagination__next"> 
+        <svg class="pagination__arrow">
+            <use xlink:href="../../../../assets/img/sprite.svg#icon-right-arrow"></use>
+        </svg>
+    </button>
+</div>

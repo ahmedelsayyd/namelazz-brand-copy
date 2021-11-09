@@ -1,0 +1,51 @@
+.button{
+    padding: 1rem 0rem;
+    background-color: $color-accent;
+    color: $color-primary;
+    border: none;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    font-weight: 500;
+  
+    &--w-full{ 
+      width: 100%;
+    }
+  
+    &--lg{
+      margin-right: 1.5rem;
+      padding: 1rem 7rem;
+      font-size: 1.3rem;
+    }
+  
+    &--md{
+      margin-right: 1.5rem;
+      padding: 1rem 3rem;
+    }
+  
+    &--sm{
+      margin-right: 1.5rem;
+      padding: 1rem 1rem;
+    }
+    &:hover{
+      background-color: $color-accent-dark;
+    }
+  
+    &--transparent{
+      background-color: $color-primary;
+      color: $color-dark-500;
+      border: 1px solid $color-dark-500;
+      font-weight: 700;
+  
+      &:hover{
+        background-color: $color-primary;
+    
+      }
+    }
+    
+    &:disabled{
+      cursor:not-allowed;
+      background-color: rgba($color-accent,.7) ;
+    }
+    
+    
+  }

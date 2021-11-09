@@ -1,0 +1,180 @@
+<div class="account">
+    <div class="container">
+        <form class="account__form form" [formGroup]="userForm" (ngSubmit)="submit(userForm.value)">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="sub-heading sub-heading--sm mb-5">Personal Account</h3>
+
+                    <div class="form__group position-relative">
+                        <input class="input input--underline input--w-md" type="text" id="name"
+                         formControlName="name" [attr.data-val]="f.name.value">
+
+                        <label class="animate-label mb-0" for="name">Name</label>
+                    </div>
+
+                    
+                    <div class="form__group position-relative">
+                        <input class="input input--underline input--w-md" type="text" id="surname" 
+                        [attr.data-val]="f.surname.value" formControlName="surname">
+
+                        <label class="animate-label mb-0" for="surname">Surname</label>
+                    </div>
+
+
+                    <div class="form__group position-relative">
+                        <ngx-intl-tel-input [cssClass]="'custom'" [preferredCountries]="preferredCountries"
+                        [enableAutoCountrySelect]="false" [enablePlaceholder]="true" [searchCountryFlag]="true"
+                        [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]" [selectFirstCountry]="false"
+                        [selectedCountryISO]="CountryISO.Egypt" [maxLength]="15"
+                        [phoneValidation]="true" [separateDialCode]="separateDialCode"
+                        [numberFormat]="PhoneNumberFormat.National" formControlName="phone">
+                        </ngx-intl-tel-input>
+
+                        <label class="animate-label mb-0" for="phone">Phone</label>
+                    </div> 
+
+
+                    <div class="form__group position-relative">
+                        <input class="input input--underline input--w-md" type="email" id="email" 
+                        [attr.data-val]="f.email.value" formControlName="email">
+
+                        <label class="animate-label mb-0" for="email">Email</label>
+                    </div>
+
+
+                    <div class="form__group position-relative">
+                        <input 
+                        #dateInput 
+                        class="input input--underline input--w-md" 
+                        type="" id="birthday" 
+                        [attr.data-val]="f.birthday.value"
+                        (focus)="dateInput.type ='date'"
+                        (blur)="dateInput.type ='text'"
+                        formControlName="birthday">
+                        <label class="animate-label mb-0" for="birthday">Day Of Birth</label>
+                    </div>
+
+                </div>
+    
+                <div class="col-md-6">
+                    <div class="account__section">
+                        <h3 class="sub-heading sub-heading--sm mb-5">Size</h3>
+                        <div class="form__group position-relative">
+                            <select
+                            class="input input--underline input--w-md" 
+                            [attr.data-val]="f.size.value"
+                            type="text" id="size" 
+                            formControlName="size">
+                                <option disabled>select size</option>
+                                <option *ngFor="let size of (sizeVariables$ |async)" [value]="size">{{size}}</option>
+                            </select>
+                            <label class="animate-label mb-0" for="size">Clothing Size</label>
+                        </div>
+                    </div>
+
+                    <div class="account__section ">
+                        <h3 class="sub-heading sub-heading--sm mb-5">Password</h3>
+                        <div class="form__group d-flex align-items-center">
+                            <i nz-icon nzType="lock" nzTheme="twotone"></i>
+                            <a class="link link--dashed ml-2" (click)="isShown =!isShown">Chang Password</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <button class="button button--lg" type="submit">save</button>
+            </div>
+
+        </form>
+    </div>
+
+
+
+
+    <!-- CHANGE PASSWORD CARD -->
+
+    <div class="change-password" [@toggoleLoginCard]="isShown? 'show' : 'hide' ">
+        <div class="overlay"></div>
+
+        <div class="change-password__card">
+            <svg class="change-password__icon change-password__icon--close"  (click)="isShown =!isShown">
+                <use xlink:href="../../../assets/img/sprite.svg#icon-clear"></use>
+            </svg>
+
+            <span class="change-password__title">Change Password</span>
+
+            <form class="change-password__form" (onSubmit)=changePassword(changePassForm) #changePassForm="ngForm">
+
+                <div class="form__group">
+                    <input class="input input--underline input--w-full" 
+                    [ngClass]="(changePassForm.submitted && !oldPass.touched) ? 'notValid': ''"
+                    [attr.data-val]="oldPass.value"
+                    type="password" name="oldPass" 
+                    id="oldPass" 
+                    required
+                    ngModel
+                    #oldPass= "ngModel" >
+                    <label class="animate-label" for="oldPass">Old Password</label>
+                    
+                    <span class="input-requirments input-requirments--error " 
+                        *ngIf="(oldPass.value?.length < 1) &&
+                        ((oldPass.errors?.required && oldPass.touched) || (changePassForm.submitted && !oldPass.touched))">&#9679; This field is required
+                    </span>
+                </div>
+
+
+                
+                <div class="form__group">
+                    <input class="input input--underline input--w-full" 
+                    [ngClass]="(changePassForm.submitted && !newPass.touched) ? 'notValid': ''"
+                    [attr.data-val]="newPass.value"
+                    type="password" name="newPass" 
+                    id="newPass" 
+                    required
+                    ngModel
+                    #newPass= "ngModel" 
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                    <label class="animate-label" for="newPass">New Password</label>
+                    
+                    <span class="input-requirments input-requirments--error " 
+                        *ngIf="(newPass.value?.length < 1) &&
+                        ((newPass.errors?.required && newPass.touched) || (changePassForm.submitted && !newPass.touched))">&#9679; This field is required
+                    </span>
+                </div>
+
+
+                
+                <div class="form__group">
+                    <input class="input input--underline input--w-full" 
+                    [ngClass]="(changePassForm.submitted && !confirmNewPass.touched) ? 'notValid': ''"
+                    [attr.data-val]="confirmNewPass.value"
+                    type="password" name="confirmNewPass" 
+                    id="confirmNewPass" 
+                    required
+                    ngModel
+                    #confirmNewPass= "ngModel" 
+                    pattern="{{newPass.value}}">
+                    <label class="animate-label" for="confirmNewPass">Confirm Password</label>
+                    
+                    <span class="input-requirments input-requirments--error " 
+                        *ngIf="(confirmNewPass.value?.length < 1) &&
+                        ((confirmNewPass.errors?.required && confirmNewPass.touched) || (changePassForm.submitted && !confirmNewPass.touched))">&#9679; This field is required
+                    </span>
+
+                    <span class="input-requirments--error"
+                    *ngIf="confirmNewPass.errors?.pattern && confirmNewPass.touched">&#9679; Confirm password does not match
+                    </span> 
+                    
+                </div>
+
+                <div class="form__group">
+                    <button type="submit" class="button button--w-full">Save</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

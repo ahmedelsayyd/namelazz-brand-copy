@@ -1,0 +1,189 @@
+<div class="register" >
+    
+    <div class="register__card">
+            
+            <svg class="register__icon register__icon--user">
+                <use xlink:href="../../../assets/img/sprite.svg#icon-user"></use>
+            </svg>
+       
+            <span class="register__title ">Authorization</span>
+
+            <!-- REGISTER FORM -->
+            <form class="register__form form" (ngSubmit)="onSubmit(f.value)" #f="ngForm" >
+
+                <div class="form__group">
+                    <label class="label" for="name">name</label>
+                    <input class="input input--w-full" 
+                            [ngClass]="(f.submitted && !name.touched) ? 'notValid': ''"
+                            type="name" 
+                            name="name" 
+                            id="name" 
+                            placeholder="Enter your Name"
+                            required
+                            [(ngModel)]="user.name"
+                            #name= "ngModel"
+                            minlength="3" maxlength= "10" trackFocus>
+
+                    <div class="input-requirments" *ngIf="(focusListener$ | async) as  focusListener">
+                        <span class="input-requirments--hint show" 
+                              *ngIf="focusListener.focused &&
+                              focusListener.el === 'name' &&
+                                name.value?.length < 3 && !name.touched">&#9679; At least 3 characters long</span>       
+                        <span class="input-requirments--error show" 
+                              *ngIf="name.value?.length < 3 && name.touched">&#9679; Must be at least 3 characters long</span> 
+                    </div>
+                    <span class="input-requirments input-requirments--error " 
+                        *ngIf="(name.value?.length < 1) &&((name.errors?.required && name.touched) || (f.submitted && !name.touched))">&#9679; This field is required
+                    </span>
+
+                </div>
+
+
+
+                <div class="form__group">
+                    <label class="label" for="email">Email</label>
+                    <input class="input input--w-fullt" 
+                            type="email" 
+                            name="email"
+                            id="email" 
+                            placeholder="Enter your email"
+                            [(ngModel)]="user.email"
+                            email="true"
+                            required
+                            #email= "ngModel" trackFocus>
+                            
+                    <div class="input-requirments"  *ngIf="(focusListener$ | async) as  focusListener">
+                        <span class="input-requirments--hint " 
+                                *ngIf="focusListener.focused &&
+                                focusListener.el === 'email' &&
+                                !email.touched">&#9679; should be like this (example@example.com)
+                        </span>       
+                        <span class="input-requirments--error " 
+                                *ngIf="email.errors?.email &&
+                                    !email.errors?.required &&
+                                    email.touched">&#9679; Must be a valid email
+                        </span>      
+                    </div> 
+                    <span class="input-requirments input-requirments--error " 
+                        *ngIf="(email.value?.length < 1) &&
+                                ((email.errors?.required && email.touched) || (f.submitted && !email.touched))">&#9679; This field is required
+                    </span>
+
+                </div>
+
+
+
+                <div class="form__group">
+                    <label class="label" for="password">Password</label>
+                    <input class="input input--w-full" 
+                            type="password" 
+                            name="password" 
+                            id="password" 
+                            placeholder="Enter your password"
+                            required
+                            [(ngModel)]="user.password"
+                            #password="ngModel"
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                            trackFocus>
+
+                        <div *ngIf=" (focusListener$ | async) as  focusListener ">
+                            <div class="input-requirments" *ngIf="focusListener.focused && 
+                                        focusListener.el === 'password' &&
+                                        !password.touched">
+                                    <span class="input-requirments--hint">&#9679; Must only contain letters and numbers (no special characters)</span> 
+                                    <span class="input-requirments--hint">&#9679; At least 8 characters long (and less than 100 characters)</span>                                          
+                                    <span class="input-requirments--hint">&#9679; Contains at least 1 uppercase letter</span> 
+                                    <span class="input-requirments--hint">&#9679; Contains at least 1 lowercase letter</span> 
+                            </div>
+
+                            <div class="input-requirments">
+                                <span class="input-requirments--error" 
+                                        *ngIf="password.value?.length < 8 && password.touched">&#9679; Must be at least 8 characters long (and less than 100 characters)</span>
+                                <span class="input-requirments--error"
+                                        *ngIf="password.errors?.pattern && !password.errors?.required && password.touched">&#9679; Must only contain letters and numbers (no special characters)</span> 
+                                <span class="input-requirments--error"
+                                        *ngIf="password.errors?.pattern && !password.errors?.required && password.touched">&#9679; Contains at least 1 uppercase letter</span> 
+                                <span class="input-requirments--error"
+                                       *ngIf="password.errors?.pattern && !password.errors?.required && password.touched">&#9679; Contains at least 1 lowercase letter</span> 
+                            </div>
+                        </div>
+                        <span class="input-requirments input-requirments--error"
+                                *ngIf="(password.value?.length < 1) && f.submitted && !password.touched">&#9679; This field is requierd
+                        </span>     
+                </div>
+
+
+
+                <div class="form__group">
+                    <label class="label" for="confirmedPassword">Password Confirm</label>
+                    <input class="input input--w-full" 
+                            type="password" 
+                            name="confirmedPassword" 
+                            id="confirmedPassword" 
+                            placeholder="Password Confirm"
+                            required
+                            ngModel
+                            pattern="{{password.value}}"
+                            #confirmedPassword= "ngModel" trackFocus>
+
+                    <div class="input-requirments">
+                        <span class="input-requirments--error"
+                                *ngIf="confirmedPassword.errors?.pattern && confirmedPassword.touched">&#9679; Confirm password does not match
+                        </span>                                          
+                        
+                        <span class="input-requirments input-requirments--error"
+                            *ngIf="((confirmedPassword.errors?.required && confirmedPassword.touched) ||
+                                    (f.submitted && !confirmedPassword.touched)) &&
+                                    (confirmedPassword.value?.length < 1)">&#9679; This field is requierd
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form__actions">
+                    <button type="submit" class="form__submit__button" >Create An Account</button>
+                </div>
+            </form>
+
+            <div class="register__to-login">
+                <span class="register__sub__title">By clicking Create Account I accept the <a class="policy" routerLink="/policy">Privacy And Policy</a></span>
+                <a class="login__link" routerLink="/login" >Already have an account?</a>
+            </div>
+
+
+            <div class="register__with-social">
+                <span class="register__sub__title">Authorization Through Social Network</span>
+                <ul class="social__logos">
+                    <li>
+                        <a (click)="loginWithGoogle()">
+                            <svg class="register__icon">
+                                <use xlink:href="../../../assets/img/sprite.svg#icon-google"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="loginWithFacebook()">
+                            <svg class="register__icon">
+                                <use xlink:href="../../../assets/img/sprite.svg#icon-facebook"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a >
+                            <div class="register__icon">
+                                <img src="../../../assets/img/instagram.svg" alt="">
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a >
+                            <svg class="register__icon">
+                                <use xlink:href="../../../assets/img/sprite.svg#icon-twitter"></use>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+    </div>
+
+</div>
+

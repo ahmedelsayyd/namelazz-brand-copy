@@ -1,0 +1,98 @@
+<div class="product-attr">
+    <div class="row">
+        <div class="col-md-6">
+            <form nz-form [nzLayout]="" [formGroup]= "attrForm" (ngSubmit)="onSubmit(attrForm.value)">
+                <!-- <span class="input-lable">Add Attribute</span> -->
+                <nz-form-item >
+                    <nz-form-label class="input-lable" nzFor="attrName">Add Attribute</nz-form-label>
+                    <nz-form-control
+                        [nzXs]="24"
+                        [nzSm]="20"
+                        nzErrorTip="Please input passenger's name or delete this field."
+                        [nzErrorTip]="attrErrorTpl">
+
+                      <input
+                        nz-input 
+                        type="text"  
+                        class="passenger-input"
+                        formControlName="attrName"
+                        placeholder="add attribute"
+                        >  
+                      <ng-template #attrErrorTpl let-control>
+                        <ng-container *ngIf="control.hasError('required')">
+                          Please input attribute Name!
+                        </ng-container>
+                      </ng-template>
+                    </nz-form-control>
+                  </nz-form-item >
+
+                  <!-- <span class="input-lable">Add Variabes</span> -->
+                  
+                  <nz-form-item formGroupName="variables" *ngFor="let control of listOfControl; let i = index">
+                    <nz-form-label class="input-lable" [nzXs]="24" [nzSm]="5" *ngIf="i == 0" [nzFor]="control.controlInstance">Add Variabes</nz-form-label>
+                    <nz-form-control
+                      [nzXs]="24"
+                      [nzSm]="20"
+                      [nzOffset]="i == 0 ? 0 : 5"
+                      nzErrorTip="Please input passenger's name or delete this field."
+                    >
+                      <input
+                        class="passenger-input"
+                        nz-input
+                        placeholder="placeholder"
+                        [attr.id]="control.id"
+                        [formControlName]="control.controlInstance"
+                      />
+                      <i nz-icon nzType="minus-circle-o" class="dynamic-delete-button" (click)="removeField(control, $event)"></i>
+                    </nz-form-control>
+                  </nz-form-item>
+                  <nz-form-item>
+                    <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 20, offset: 5 }">
+                      <button nz-button nzType="dashed" class="add-button" (click)="addField($event)">
+                        <i nz-icon nzType="plus"></i>
+                        Add field
+                      </button>
+                    </nz-form-control>
+                  </nz-form-item>
+
+                  <nz-form-item>
+                    <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 20, offset: 5 }">
+                      <button class="btn-submit"  nz-button >Submit</button>
+                    </nz-form-control>
+                  </nz-form-item>
+                
+            </form>
+        </div>
+
+        <div class="col-md-6">
+            <nz-table #basicTable [nzData]="tableData">
+                <thead>
+                    <tr>
+                        <th>Attributes</th>
+                        <th>Variables</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <div>
+                    
+                  </div>
+                    <tr *ngFor="let data of basicTable.data; let i = index">
+                      <td >{{data.attrName}}</td>
+                      
+                      <td>
+                        <span *ngFor="let varArr of data.variables">
+                            {{varArr}}<nz-divider nzType="vertical"></nz-divider>
+                        </span>
+                      </td>   
+
+                        <td>
+                            <nz-divider nzType="vertical"></nz-divider>
+                            <a class="delet" (click)="deleteVar(data.id)">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+</div>

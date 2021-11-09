@@ -1,1 +1,80 @@
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+@import "./styles/variable.scss";
+
+@import "./styles/base/utilites";
+@import "./styles/base/_typography";
+
+@import "./styles/components/line";
+@import "./styles/components/button";
+@import "./styles/components/link";
+@import "./styles/components/input";
+
+
+html {
+  font-size: 62.5%;
+
+  // @media only screen and (max-width: $bp-larg) {
+  //   font-size: 50%;
+  // }
+
+}
+
+body {
+  //color: var(--grey-dark-200);
+  font-family: "Raleway", sans-serif;
+  //font-weight: 400;
+  line-height: 1.6;
+  min-height: 100vh;
+  font-size: 1.6rem;
+  //height: 200vh;
+}
+
+
+ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.input-requirments{
+  display: flex;
+  flex-direction: column;
+  font-size: 1.3rem;
+  font-style: italic;
+
+    &--hint{
+      color: $color-dark-500;
+      font-size: 1.25rem;
+      transition: all .2s;
+    }
+
+    &--error{
+      color: $color-accent-danger;
+    }
+
+    .show{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hide{
+      opacity: 0;
+      transform: translateY(-4rem);
+    }
+}
+
+
+.overlay{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(6px);
+  z-index: 9;
+}
+
+
+

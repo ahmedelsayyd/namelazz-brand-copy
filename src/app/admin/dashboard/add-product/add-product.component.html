@@ -1,0 +1,209 @@
+<div class="product-form">
+  <h2>Add Product</h2>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="product-img">
+        <div>
+
+          <span class="image-lable">Add Images</span>
+          <nz-upload
+          nzType="drag"
+          nzListType="picture"
+          [nzMultiple]="true"
+          [nzCustomRequest]	="customUploadReq"
+          [(nzFileList)]="fileList"
+          [nzRemove]="imageRemoved"  
+          (nzChange)="handleChange($event)">
+            <p class="ant-upload-drag-icon">
+              <i nz-icon nzType="inbox"></i>
+            </p>
+            <p class="ant-upload-text">Click or drag file to this area to upload</p>
+            <p class="ant-upload-hint">
+              Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files
+            </p>
+          </nz-upload>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 ">
+      <div class="product-details">
+        <form  nz-form [nzLayout]="'vertical'" [formGroup]="productForm" (ngSubmit)="submitForm(productForm.value)">
+  
+          <nz-form-item>
+            <nz-form-label nzRequired [nzSpan]="6" nzFor="name">Product Name</nz-form-label>
+            <nz-form-control [nzErrorTip]="nameErrorTpl">
+              <input nz-input formControlName="name" type="text" id="name">
+              <ng-template #nameErrorTpl let-control>
+                <ng-container *ngIf="f.name.errors?.required">
+                  Please input product Name!
+                </ng-container>
+              </ng-template>
+              <!-- <span *ngIf="submitted && f.name.errors?.required">please input product name</span> -->
+            </nz-form-control>
+          </nz-form-item >
+  
+          <nz-form-item>
+            <nz-form-label nzRequired [nzSpan]="6" nzFor="catogary">Catogary</nz-form-label>
+            <nz-form-control [nzSpan]="" [nzErrorTip]="categoryErrorTpl">
+              <input nz-input formControlName="category" type="text" id="catogary">
+              <ng-template #categoryErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required') && submitted">
+                  Please input product category!
+                </ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item >
+  
+          <nz-form-item>
+            <nz-form-label  [nzSpan]="6" nzFor="subCatogart">Sub Catogart</nz-form-label>
+            <nz-form-control [nzSpan]="">
+              <input nz-input formControlName="subCategory" type="text" id="subCatogart">
+            </nz-form-control>
+          </nz-form-item >
+  
+          <nz-form-item>
+            <nz-form-label nzRequired [nzSpan]="6" nzFor="price">Price</nz-form-label>
+            <nz-form-control [nzSpan]="" [nzErrorTip]="priceErrorTpl">
+              <input nz-input formControlName="price" type="number" id="price">
+              <ng-template #priceErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required') && submitted">
+                  Please input product price!
+                </ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item >
+  
+          <nz-form-item>
+            <nz-form-label nzRequired [nzSpan]="6" nzFor="stock">Stock</nz-form-label>
+            <nz-form-control [nzSpan]="" [nzErrorTip]="stockErrorTpl">
+              <input nz-input formControlName="stock" type="number" id="stock">
+              <ng-template #stockErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required') && submitted">
+                  Please input product stock!
+                </ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item >
+
+          <nz-form-item>
+            <nz-form-label nzRequired [nzSpan]="6" nzFor="discount">discount Percentage</nz-form-label>
+            <nz-form-control [nzSpan]="" [nzErrorTip]="discountErrorTpl">
+              <input  nz-input formControlName="discount" type="number" id="discount">
+              <ng-template #discountErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                  Please input product discount!
+                </ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+
+          <!-- ///////////////////// -->
+
+
+            <nz-form-item>
+              <nz-form-label [nzSpan]="10" nzFor="attr" nzRequired>Add Attribute</nz-form-label>
+                <nz-form-control [nzSpan]="" nzErrorTip="Please select product attribute!">
+                  <nz-select 
+                    (ngModelChange)="selectedAttr($event)"
+                    nzMode="multiple"
+                    [nzSize]="size" 
+                    id="attr" 
+                    name="attr" 
+                    formControlName="attr" 
+                    nzPlaceHolder="select product attribute"> 
+                      <nz-option *ngFor="let attr of (productAttributes | async); let i=index" [nzValue]="attr.attrName" [nzLabel]="attr.attrName"></nz-option>
+                  </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+      
+          <!-- /////////////////////////// -->
+
+
+        <!-- ///////////////////// -->
+        <div *ngFor="let attr of selectedAttrs" formGroupName="attrVariables">
+          <nz-form-item *ngIf="attr.attrName" >
+            <nz-form-label [nzSpan]="10" nzFor="attrVariable" nzRequired>Select {{attr.attrName}} variables</nz-form-label>
+              <nz-form-control [nzSpan]="" nzErrorTip="Please select product variables!">
+                <nz-select [formControlName]="attr.attrName" id="attrVariable"  nzMode="multiple"  [nzSize]="size" nzPlaceHolder="Please select">
+                  <nz-option  *ngFor="let attrVar of attr.variables" [nzLabel]="attrVar" [nzValue]="attrVar"></nz-option>
+                </nz-select>
+            </nz-form-control> 
+          </nz-form-item>
+        </div>
+      <!-- /////////////////////////// -->
+
+
+      
+      <nz-form-item>
+            <nz-form-label nzRequired [nzSpan]="6" nzFor="description">Description</nz-form-label>
+            <nz-form-control [nzErrorTip]="descErrorTpl">
+              <textarea formControlName="description" rows="4" nz-input></textarea>
+              <ng-template #descErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required') && submitted">
+                  Please input product description!
+                </ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item >
+          <nz-form-item>
+            <nz-form-label nzRequired [nzSpan]="6" nzFor="tags">Tags</nz-form-label>
+            <div class="tags">
+
+              <nz-form-control>
+                <nz-tag *ngFor="let tag of tags; let i = index" [nzMode]="i === 0 ? 'default' : 'closeable'" (nzOnClose)="handleClose(tag)">
+                  {{ sliceTagName(tag) }}
+                </nz-tag>
+                <nz-tag *ngIf="!inputVisible" class="editable-tag" nzNoAnimation (click)="showInput()">
+                  <i nz-icon nzType="plus"></i>
+                  New Tag
+                </nz-tag>
+                <input
+                  #inputElement
+                  formControlName="tags"
+                  nz-input       
+                  nzSize="small"
+                  *ngIf="inputVisible"
+                  type="text"
+                  name="tags"
+                  
+                  style="width: 78px;"
+                  (blur)="handleInputConfirm()"
+                  (keydown.enter)="handleInputConfirm()"
+                />
+              </nz-form-control>
+
+            </div>
+          </nz-form-item>
+
+
+          <nz-form-item>
+            <nz-form-label nzRequired [nzSpan]="6" nzFor="description">Is Avilable ?</nz-form-label>
+            <nz-form-control [nzErrorTip]="isAvErrorTpl">
+              <nz-radio-group formControlName="isAvilable" rows="4"  v>
+                <label nz-radio nzValue="true">Avilable</label>
+                <label nz-radio nzValue="false">Non-Available</label>
+              </nz-radio-group>
+              <ng-template #isAvErrorTpl let-control>
+                <ng-container *ngIf="control.hasError('required')">
+                  Please input product description!
+                </ng-container>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item >
+
+
+          <nz-form-item>
+            <nz-form-control [nzOffset]="7" [nzSpan]="12">
+              <button *ngIf="!editMode" nz-button  class="mr-3 button button--submit">Submit</button>
+              <button *ngIf="editMode" nz-button  class="mr-3 button button--submit">Update</button>
+              <button nz-button class="button button--submit" (click)="resetForm($event)">Reset</button>
+            </nz-form-control>
+          </nz-form-item>
+
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

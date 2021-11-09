@@ -1,0 +1,199 @@
+<div class="shipping">
+    <div class="container">
+
+        <div class="row">
+            <div class="paragraph paragraph--short mb-3">shopping cart/<strong>shipping/delivery/payment method</strong></div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6 pl-0">
+                <form class="shipping__form form" [formGroup]="shippingForm" (ngSubmit)="placeOrder(shippingForm.value)">
+                    
+                    <!-- SHIPPING CONTACTS -->
+                    <h3 class="sub-heading sub-heading--md mb-0">Contacts</h3>
+                    <div class="line"></div>
+    
+                    <div class="shipping__contacts">
+                        <span class="sub-heading sub-heading--sm mt-4 d-block">Your Details</span>
+                    </div>
+
+                    <div class="form__group d-flex " >
+                        <input [ngClass]="{ 'invalid': submitted && f.firstName.errors }" class="input input--underline input--w-sm" type="text" placeholder="first name" formControlName="firstName">
+                        <input [ngClass]="{ 'invalid': submitted && f.firstName.errors }"  class="input input--underline input--w-sm" type="text" placeholder="last name" formControlName="lastName">
+                    </div>
+                    <div *ngIf="submitted" class="invalid-feedback">
+                        <div *ngIf="f.firstName.errors?.required">firstName is required</div>
+                        <div *ngIf="f.lastName.errors?.required">lastName is required</div>
+                    </div>
+                    
+
+                    <div class="form__group">
+                        <input [ngClass]="{ 'invalid': submitted && f.email.errors }" class="input input--underline input--w-lg" type="email" placeholder="E-mail" formControlName="email">
+                    </div>
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors?.required">Email is required</div>
+                        <div *ngIf="f.email.errors?.email">Email must be a valid email address</div>
+                    </div>
+
+
+                    <div class="form__tacbox d-flex align-items-center">
+                        <input class="mr-3" id="checkbox" type="checkbox" formControlName="acceptTerms" />
+                        <label for="checkbox"> I agree to the personal data processing policy and the user agreement.</label>
+                    </div>
+                    <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback">Accept Ts & Cs is required</div>
+
+
+                    <!-- SHIPPING ADDRESSES -->
+                    <h3 class="sub-heading sub-heading--md mb-0 mt-6">Shipping address</h3>
+                    <div class="line"></div>
+
+                    <div class="shipping__address">
+                        <span class="sub-heading sub-heading--sm mt-4 d-block">address</span>
+                    </div>
+
+                    <div class="form__group d-flex " >
+                        <input 
+                            [ngClass]="{ 'invalid': submitted && f.country.errors }"
+                            class="input input--underline input--w-sm"
+                            type="text" 
+                            placeholder="Country/Region"
+                            formControlName="country">
+                        <input 
+                            [ngClass]="{ 'invalid': submitted && f.city.errors }"
+                            class="input input--underline input--w-sm"
+                            type="text" 
+                            placeholder="City"
+                            formControlName="city">
+                    </div>
+                    <div *ngIf="submitted" class="invalid-feedback">
+                        <div *ngIf="f.country.errors?.required">country is required</div>
+                        <div *ngIf="f.city.errors?.required">city is required</div>
+                    </div>
+
+                    <div class="form__group d-flex " >
+                        <input 
+                            [ngClass]="{ 'invalid': submitted && f.postcode.errors }"
+                            class="input input--underline input--w-sm"
+                            type="text" 
+                            placeholder="Postcode"
+                           formControlName="postcode">
+                        <input 
+                            [ngClass]="{ 'invalid': submitted && f.address.errors }"
+                            class="input input--underline input--w-sm"
+                            type="text" 
+                            placeholder="Address.appartment.suite"
+                            formControlName="address">
+                    </div>
+                    <div *ngIf="submitted" class="invalid-feedback">
+                        <div *ngIf="f.postcode.errors?.required">postcode is required</div>
+                        <div *ngIf="f.address.errors?.required">Address is required</div>
+                    </div>
+
+                    <!-- SHIPPING BY  -->
+                    <div class="form__tacbox d-flex align-items-center mt-4">
+                        <input 
+                            formControlName="shippingBy"
+                            class="mr-3"
+                            [value]="shippingFees.courier"
+                            id="radio1"
+                            type="radio"/>
+                        <label class="mr-auto" for="radio1">By SDEC courier</label>
+                        <span class="fees">{{shippingFees.courier | currency : 'RUB': 'symbol-narrow':'3.0' : 'ru'}}</span>
+                    </div>
+                    <div class="form__tacbox d-flex align-items-center">
+                        <input 
+                            formControlName="shippingBy"
+                            class="mr-3" 
+                            [value]="shippingFees.point" 
+                            id="radio2"
+                            type="radio" />
+                        <label class="mr-auto" for="radio2">By SDEC issuing point</label>
+                        <span class="fees">{{shippingFees.point | currency : 'RUB': 'symbol-narrow':'3.0' : 'ru'}}</span>
+                    </div>
+
+                    <div class="form__tacbox d-flex align-items-center">
+                        <input
+                            formControlName="shippingBy"
+                            class="mr-3"
+                            [value]="shippingFees.post"
+                            id="radio3" type="radio"/>
+                        <label class="mr-auto" for="radio3">By Russian Post</label>
+                        <span class="fees">{{shippingFees.post | currency : 'RUB': 'symbol-narrow':'3.0' : 'ru'}}</span>
+                    </div>
+                    <div *ngIf="submitted && f.shippingBy.errors" class="invalid-feedback">Select shipping method</div>
+
+
+                    <!-- SHIPPING PAYMENT METHOD -->
+                    <h3 class="sub-heading sub-heading--md mb-0 mt-6">Payment</h3>
+                    <div class="line"></div>
+
+                    <div class="shipping__address">
+                        <span class="sub-heading sub-heading--sm mt-5 d-block">Payment Method</span>
+                    </div>
+
+                    <div class="form__tacbox d-flex align-items-center">
+                        <input formControlName="paymentMethod" class="mr-3" value="Credit" id="payment1" type="radio" />
+                        <label for="payment1">Credit Card</label>
+                    </div>
+                    <div class="form__tacbox d-flex align-items-center">
+                        <input formControlName="paymentMethod" class="mr-3" value="Apple"  id="payment2" type="radio" />
+                        <label for="payment2">Apple Pay</label>
+                    </div>
+                    <div class="form__tacbox d-flex align-items-center">
+                        <input formControlName="paymentMethod" class="mr-3" value="Cash" id="payment3" type="radio" />
+                        <label for="payment3">Cash</label>
+                    </div>
+                    <div *ngIf="submitted && f.paymentMethod.errors" class="invalid-feedback">Select payment method</div>
+
+
+
+                    <div class="submit mt-5 mb-3">
+                        <button class="button button--lg" type="submit">place An order</button>
+                    </div>
+
+                </form>
+
+                <a  class="link link--bold"> 
+                    <svg class="link__arrow link__arrow--sm mr-3">
+                        <use xlink:href="../../../assets/img/sprite.svg#icon-left-arrow"></use>
+                    </svg>
+                    <span class="link__name link__name--sm" routerLink="/cart">back To the Shopping Cart</span>
+                </a>
+
+            </div>
+
+
+
+            <div class="col-md-5 offset-md-1 pr-0">
+                <h3 class="sub-heading sub-heading--sm " >Your Order</h3>
+
+                <div class="shipping__order" >
+                    <div class=""   *ngFor="let item of cart?.items; let i=index">
+                        <cart-item [ngClass]="i==0 ? 'first' : '' " [cartItem]= "item"></cart-item>
+                    </div>
+
+                    <!-- Total Calc -->
+                    <div class="shipping__sub-total d-flex justify-content-between mt-5">
+                        <span>Subtotal</span>
+                        <span class="value">{{cart?.totalPrice | currency : 'RUB': 'symbol-narrow':'3.0' : 'ru'}}</span>
+                    </div>
+                    <div class="shipping__shipping d-flex justify-content-between">
+                        <span>Shipping</span>
+                        <span class="value">{{cart?.shipping | currency : 'RUB': 'symbol-narrow':'3.0' : 'ru'}}</span>
+                    </div>
+
+                    <div class="line my-5"></div>
+
+
+                    <div class="shipping__total-price d-flex justify-content-between">
+                        <span>Total</span>
+                        <span class="value">{{cartValues.total() | currency : 'RUB': 'symbol-narrow':'3.0' : 'ru'}}</span>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

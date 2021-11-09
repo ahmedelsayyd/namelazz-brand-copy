@@ -1,0 +1,85 @@
+@import "../../../../styles/variable.scss";
+
+.product-attr{
+
+    nz-table{
+        border: 1px solid $color-accent;
+    }
+
+    th{
+        color: $color-accent-dark;
+    }
+    .delet{
+        color: $color-accent-danger;
+    }
+
+
+    .dynamic-delete-button {
+        cursor: pointer;
+        position: relative;
+        top: 4px;
+        font-size: 24px;
+        color: #999;
+        transition: all 0.3s;
+    }
+
+    .dynamic-delete-button:hover {
+    color: #777;
+    }
+
+    .passenger-input {
+    width: 60%;
+    margin-right: 8px;
+    }
+
+    [nz-form] {
+    max-width: 600px;
+    }
+
+    .add-button {
+    width: 60%;
+    }
+
+    .input-lable{      
+        font-weight: 600;
+
+        label{
+            color: $color-accent-dark;
+        }
+    }
+    .ant-form-item-label>label{
+        color: $color-accent-dark;
+
+    }
+
+    .ant-form-item-label{
+        text-align: left
+    }
+
+    .add-button{
+        border: 1px dashed $color-accent-dark;
+        background-color: transparent;
+
+        padding: .55rem 0rem;
+
+        &:hover{
+            border: 1px dashed $color-accent-success;
+        }
+    }
+
+    .btn-submit{
+        border: none;
+        background-color: $color-accent;
+        color: $color-primary;
+        padding: .4rem 1rem;
+
+        &:hover{
+            background-color: $color-accent-dark
+        }
+    }
+    
+    hr{
+        margin-bottom: 2.4rem
+    }
+
+}
