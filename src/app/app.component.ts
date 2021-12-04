@@ -1,5 +1,5 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, ElementRef, HostListener, Inject, NgZone, OnDestroy, OnInit } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { Component, ElementRef, HostListener, Inject, NgZone, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { combineLatest, fromEvent, Observable, Subscription } from 'rxjs';
 import { UiService } from './shared/services/ui.service';
 
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit, OnDestroy {
   eventSub:Subscription
 
   private window:Window;
-
+  isBrowser
   // @HostListener("window:scroll", ["$event"]) onScroll(e: any): void {
   //   //console.log(window.innerHeight, window.outerHeight);
   //   console.log(e.target)
@@ -30,8 +30,12 @@ export class AppComponent implements OnInit, OnDestroy {
     private uiService: UiService,
     private zone: NgZone,
     private elRef: ElementRef,
+    @Inject(PLATFORM_ID) platformId: Object,
     @Inject(DOCUMENT) private document: any) {
+
       this.window = this.document.defaultView;
+
+      this.isBrowser = isPlatformBrowser(platformId);
      }
 
 
@@ -81,8 +85,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onActive(e,outlet) {    
     this.uiService.updateLoadedComponent(e.constructor.name);
-    outlet.scrollTop = 0;
-    window.scrollTo(0, 0);
+
+    if(this.isBrowser){
+
+      outlet.scrollTop = 0;
+      window.scrollTo(0, 0);
+    }
   }
 
 

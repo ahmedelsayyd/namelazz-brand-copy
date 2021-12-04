@@ -42,7 +42,7 @@ registerLocaleData(en);
   ],
   imports: [
     CommonModule,
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AppRoutingModule,
